@@ -11,8 +11,11 @@ class Song < ActiveRecord::Base
     self.artist ? self.artist.name : nil
   end
 
-  def genre_name=(input)
-    self.genre = Genre.find_by(name: input)
+  def note_content=(array_of_content)
+    array_of_content.each do |c|
+      note = Note.find_or_create_by(content: c)
+      self.notes << note
+    end
   end
 
 end
